@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": true,
+    "dart.lineLength": 100,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.rulers": [100]
+}
