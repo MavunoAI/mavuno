@@ -1,0 +1,10 @@
+name: mavuno
+
+environment:
+  sdk: '^3.12.0'
+
+publish_to: none
+
+
+dev_dependencies:
+  melos: ^7.0.0

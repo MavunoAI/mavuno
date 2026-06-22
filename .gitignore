@@ -1,0 +1,41 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+
+# Android
+**/local.properties
+
+# VS Code
+.vscode/*.log
+
+# IntelliJ
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Logs
+*.log
+
+# AI Models
+models/**/*.gguf
+models/**/*.onnx
+models/**/*.bin
+
+# Downloads
+models/downloads/
+
+# Cache
+models/cache/
+
+# Generated datasets
+datasets/**/*.zip
+datasets/**/*.tar.gz

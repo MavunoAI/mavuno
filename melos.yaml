@@ -1,0 +1,24 @@
+name: mavuno
+
+repository: .
+
+packages:
+  - apps/**
+  - packages/**
+
+scripts:
+
+  bootstrap:
+    run: flutter pub get
+
+  analyze:
+    run: flutter analyze
+
+  format:
+    run: dart format .
+
+  test:
+    run: flutter test
+
+  clean:
+    run: flutter clean
