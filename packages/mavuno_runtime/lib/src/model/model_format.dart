@@ -1,0 +1,1 @@
+enum ModelFormat { gguf, onnx }
