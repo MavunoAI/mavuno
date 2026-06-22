@@ -1,4 +1,4 @@
-name: foundation
+name: mavuno_foundation
 description: Core immutable primitives for the Mavuno Platform.
 version: 0.1.0
 publish_to: none

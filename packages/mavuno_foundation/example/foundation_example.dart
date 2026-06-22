@@ -1,4 +1,4 @@
-import 'package:foundation/foundation.dart';
+import 'package:foundation/mavuno_foundation.dart';
 
 class Success<T> {
   final T value;
