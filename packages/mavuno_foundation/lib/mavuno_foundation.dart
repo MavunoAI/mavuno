@@ -15,3 +15,5 @@ export 'src/identifiers/identifier.dart';
 
 export 'src/time/clock.dart';
 export 'src/time/system_clock.dart';
+
+export 'src/value_objects/value_object.dart';

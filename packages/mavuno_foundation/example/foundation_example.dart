@@ -1,4 +1,13 @@
-import 'package:foundation/mavuno_foundation.dart';
+class SemanticVersion {
+  final int major;
+  final int minor;
+  final int patch;
+
+  const SemanticVersion({required this.major, required this.minor, required this.patch});
+
+  @override
+  String toString() => '$major.$minor.$patch';
+}
 
 class Success<T> {
   final T value;

@@ -1,4 +1,4 @@
-import 'package:foundation/mavuno_foundation.dart';
+import 'package:mavuno_foundation/mavuno_foundation.dart';
 import 'package:test/test.dart';
 
 void main() {
