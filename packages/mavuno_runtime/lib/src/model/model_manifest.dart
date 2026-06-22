@@ -1,4 +1,4 @@
-import 'model.dart';
+import 'entities/model.dart';
 import 'model_format.dart';
 import 'model_metadata.dart';
 

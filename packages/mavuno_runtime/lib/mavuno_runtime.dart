@@ -6,12 +6,13 @@ export 'src/runtime/runtime_exception.dart';
 export 'src/runtime/runtime_state.dart';
 // runtime_status is re-exported by src/runtime/runtime.dart; avoid duplicate export
 
-// Models
-export 'src/model/model.dart';
-export 'src/model/model_manifest.dart'; // removed: file not present
+// Model
+export 'src/model/entities/model.dart';
+export 'src/model/model_manifest.dart';
+export 'src/model/model_metadata.dart';
+export 'src/model/model_format.dart';
 
 // Loader
-export 'src/loader/model_loader.dart' hide ModelManifest;
 export 'src/loader/load_result.dart';
 export 'src/loader/model_locator.dart';
 
