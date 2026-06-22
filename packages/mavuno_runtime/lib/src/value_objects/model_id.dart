@@ -1,5 +1,6 @@
 final class ModelId {
-  const ModelId(this.value) : assert(value.length > 2, 'ModelId must not be empty.');
+  const ModelId(this.value)
+    : assert(value.length > 2, 'ModelId must not be empty.');
 
   final String value;
 

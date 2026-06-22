@@ -6,7 +6,9 @@ import 'package:test/test.dart';
 void main() {
   group('FileModelLocator', () {
     test('returns null when directory does not exist', () async {
-      final locator = FileModelLocator(searchDirectories: [Directory('does_not_exist')]);
+      final locator = FileModelLocator(
+        searchDirectories: [Directory('does_not_exist')],
+      );
 
       final result = await locator.locate('llama');
 

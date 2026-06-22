@@ -30,3 +30,4 @@ export 'src/tokenizer/tokenizer.dart';
 export 'src/tokenizer/token.dart';
 
 export 'src/loader/file_model_locator.dart';
+export 'src/loader/default_model_loader.dart';

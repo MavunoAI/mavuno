@@ -1,1 +1,8 @@
-enum RuntimeState { uninitialized, initializing, ready, busy, shuttingDown, disposed }
+enum RuntimeState {
+  uninitialized,
+  initializing,
+  ready,
+  busy,
+  shuttingDown,
+  disposed,
+}
