@@ -1,0 +1,19 @@
+name: mavuno_cli
+description: Official developer CLI for the Mavuno Platform.
+version: 0.1.0
+
+publish_to: none
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+executables:
+  mavuno:
+
+dependencies:
+  args: ^2.7.0
+  path: ^1.9.1
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.3
