@@ -10,6 +10,13 @@ dependencies:
   mavuno_foundation:
     path: ../mavuno_foundation
 
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - "**/.dart_tool/**"
+    - "**/build/**"
+
 dev_dependencies:
   lints: ^6.0.0
   test: ^1.26.3

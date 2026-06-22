@@ -28,3 +28,5 @@ export 'src/backend/backend_type.dart';
 // Tokenizer
 export 'src/tokenizer/tokenizer.dart';
 export 'src/tokenizer/token.dart';
+
+export 'src/loader/file_model_locator.dart';
