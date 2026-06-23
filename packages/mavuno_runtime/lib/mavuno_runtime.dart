@@ -31,3 +31,6 @@ export 'src/tokenizer/token.dart';
 
 export 'src/loader/file_model_locator.dart';
 export 'src/loader/default_model_loader.dart';
+
+export 'src/native/operating_system.dart';
+export 'src/native/platform_library.dart';

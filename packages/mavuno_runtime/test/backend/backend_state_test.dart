@@ -5,7 +5,11 @@ void main() {
   test('backend lifecycle states exist', () {
     expect(
       BackendState.values,
-      containsAll([BackendState.uninitialized, BackendState.initialized, BackendState.disposed]),
+      containsAll([
+        BackendState.uninitialized,
+        BackendState.initialized,
+        BackendState.disposed,
+      ]),
     );
   });
 }
