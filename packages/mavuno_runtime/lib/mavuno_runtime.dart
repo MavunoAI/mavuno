@@ -34,3 +34,5 @@ export 'src/loader/default_model_loader.dart';
 
 export 'src/native/operating_system.dart';
 export 'src/native/platform_library.dart';
+export 'src/native/native_exception.dart';
+export 'src/native/native_library.dart';

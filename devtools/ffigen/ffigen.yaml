@@ -1,8 +1,5 @@
 name: LlamaBindings
 
-description: >
-  Generated FFI bindings for the pinned llama.cpp version used by Mavuno.
-
 output: ../../packages/mavuno_runtime/lib/src/native/ffi/llama_bindings.dart
 
 headers:
@@ -11,28 +8,9 @@ headers:
 
 compiler-opts:
   - "-I../../third_party/llama.cpp/include"
+  - "-I../../third_party/llama.cpp/ggml/include"
+  - "-I../../third_party/llama.cpp/common"
+  - "-I../../third_party/llama.cpp/src"
 
-comments:
-  style: any
-
-functions:
-  include:
-    - "^llama_.*"
-
-structs:
-  include:
-    - "^llama_.*"
-
-unions:
-  include:
-    - "^llama_.*"
-
-enums:
-  include:
-    - "^llama_.*"
-
-macros:
-  include:
-    - "^LLAMA_.*"
 llvm-path:
-  - 'C:\Program Files\LLVM\bin'
+  - "C:/Program Files/LLVM/bin"
