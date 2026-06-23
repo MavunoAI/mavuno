@@ -22,9 +22,9 @@ export 'src/prompt/system_prompt.dart';
 export 'src/prompt/prompt_builder.dart';
 
 // Backend
-export 'src/backend/inference_backend.dart' hide BackendType;
-export 'src/backend/backend_type.dart';
-
+export 'src/backend/backend_exception.dart';
+export 'src/backend/backend_state.dart';
+export 'src/backend/inference_backend.dart';
 // Tokenizer
 export 'src/tokenizer/tokenizer.dart';
 export 'src/tokenizer/token.dart';
