@@ -1,13 +1,7 @@
-import '../model/model_manifest.dart';
+import '../generation/generator.dart';
 
-enum RuntimeStatus { uninitialized, initialized, shuttingDown, terminated }
+final class Runtime {
+  const Runtime({required this.generator});
 
-abstract interface class Runtime {
-  RuntimeStatus get status;
-
-  Future<void> initialize();
-
-  Future<void> shutdown();
-
-  Future<dynamic> createSession(ModelManifest manifest);
+  final Generator generator;
 }

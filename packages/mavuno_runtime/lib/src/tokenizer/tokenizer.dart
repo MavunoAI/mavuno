@@ -1,5 +1,8 @@
-import 'token.dart';
+import '../model/model_handle.dart';
+import '../prompt/prompt.dart';
+import '../token/token_sequence.dart';
 
+/// Converts prompts into model tokens.
 abstract interface class Tokenizer {
-  List<Token> tokenize(String text);
+  TokenSequence tokenize(ModelHandle model, Prompt prompt);
 }

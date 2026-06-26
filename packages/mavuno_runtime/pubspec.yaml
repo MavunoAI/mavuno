@@ -10,6 +10,8 @@ dependencies:
   mavuno_foundation:
     path: ../mavuno_foundation
 
+
+  ffi: ^2.1.4
 include: package:lints/recommended.yaml
 
 analyzer:

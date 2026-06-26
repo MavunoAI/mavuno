@@ -13,7 +13,7 @@ final class NativeLibrary {
   NativeLibrary._(this._library);
 
   final DynamicLibrary _library;
-
+  DynamicLibrary get dynamicLibrary => _library;
   factory NativeLibrary.open({LibraryLoader? loader}) {
     final libraryName = PlatformLibrary.currentLibraryName();
 

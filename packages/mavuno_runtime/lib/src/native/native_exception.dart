@@ -1,10 +1,18 @@
 /// Error categories for native runtime failures.
 enum NativeErrorCode {
-  libraryNotFound,
-  symbolNotFound,
   initializationFailed,
+
+  libraryNotFound,
+
+  symbolNotFound,
+
   modelLoadFailed,
-  unknown,
+
+  contextCreationFailed,
+
+  tokenizationFailed,
+
+  decodeFailed,
 }
 
 /// Exception thrown by the native runtime.
