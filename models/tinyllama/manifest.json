@@ -1,0 +1,10 @@
+{
+    "id": "tinyllama-1.1b-chat-v1.0",
+    "family": "TinyLlama",
+    "quantization": "Q4_K_M",
+    "context": 2048,
+    "language": [
+        "en"
+    ],
+    "type": "chat"
+}
