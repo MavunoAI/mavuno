@@ -39,3 +39,15 @@ models/cache/
 # Generated datasets
 datasets/**/*.zip
 datasets/**/*.tar.gz
+
+# GGUF Models
+models/**/*.gguf
+
+# Quantized models
+models/**/*.bin
+
+# Runtime caches
+models/**/*.cache
+
+# Download metadata
+models/**/.cache/
