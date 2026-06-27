@@ -1,12 +1,16 @@
+import '../sampling/sampler.dart';
+import '../sampling/sampling_request.dart';
+import '../sampling/sampling_result.dart';
+
 import '../token/token.dart';
-import 'logits.dart';
-import 'sampler.dart';
 
 final class GreedySampler implements Sampler {
   const GreedySampler();
 
   @override
-  Token sample(Logits logits) {
+  SamplingResult sample(SamplingRequest request) {
+    final logits = request.logits;
+
     if (logits.isEmpty) {
       throw StateError('Cannot sample from empty logits.');
     }
@@ -21,6 +25,6 @@ final class GreedySampler implements Sampler {
       }
     }
 
-    return Token(bestIndex);
+    return SamplingResult(token: Token(bestIndex));
   }
 }

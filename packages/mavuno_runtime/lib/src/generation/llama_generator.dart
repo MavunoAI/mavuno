@@ -1,5 +1,5 @@
 import '../inference/inference_engine.dart';
-import '../native/runtime/native_tokenizer.dart';
+import '../native/llama_native.dart';
 
 import 'generation_request.dart';
 import 'generation_result.dart';
@@ -18,16 +18,16 @@ import 'generator.dart';
 /// It deliberately delegates inference to [InferenceEngine]
 /// to keep orchestration separate from native runtime logic.
 final class LlamaGenerator implements Generator {
-  LlamaGenerator({required NativeTokenizer tokenizer, required InferenceEngine engine})
-    : _tokenizer = tokenizer,
+  LlamaGenerator({required LlamaNative native, required InferenceEngine engine})
+    : _native = native,
       _engine = engine;
 
-  final NativeTokenizer _tokenizer;
+  final LlamaNative _native;
   final InferenceEngine _engine;
 
   @override
   GenerationResult generate(GenerationRequest request) {
-    final promptTokens = _tokenizer.tokenize(request.model, request.prompt);
+    final promptTokens = _native.tokenize(request.model, request.prompt);
 
     final session = GenerationSession(context: request.context, promptTokens: promptTokens);
 

@@ -4,6 +4,7 @@ library;
 export 'src/runtime/runtime.dart';
 export 'src/runtime/runtime_exception.dart';
 export 'src/runtime/runtime_state.dart';
+export 'src/runtime/runtime_factory.dart';
 // runtime_status is re-exported by src/runtime/runtime.dart; avoid duplicate export
 
 // Model
@@ -46,7 +47,7 @@ export 'src/tokenizer/tokenizer_exception.dart';
 export 'src/inference/decode_request.dart';
 export 'src/inference/decoder.dart';
 export 'src/inference/logits.dart';
-export 'src/inference/sampler.dart';
+
 export 'src/inference/greedy_sampler.dart';
 export 'src/inference/llama_decoder.dart';
 
@@ -55,5 +56,9 @@ export 'src/inference/decode_batch.dart';
 export 'src/native/batch_builder.dart';
 export 'src/native/llama_batch_builder.dart';
 export 'src/native/native_batch.dart';
+
+export 'src/native/llama_native.dart';
+export 'src/runtime/runtime_session.dart';
+export 'src/generation/generation_request.dart';
 
 // session exports removed: referenced session files are not present in this package.

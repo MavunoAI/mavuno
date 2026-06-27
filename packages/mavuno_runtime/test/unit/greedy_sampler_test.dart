@@ -4,6 +4,7 @@ import 'package:test/test.dart';
 
 import 'package:mavuno_runtime/src/inference/greedy_sampler.dart';
 import 'package:mavuno_runtime/src/inference/logits.dart';
+import 'package:mavuno_runtime/src/sampling/sampling_request.dart';
 
 void main() {
   test('returns highest probability token', () {
@@ -11,8 +12,8 @@ void main() {
 
     final logits = Logits(Float32List.fromList([0.2, 0.8, 0.1]));
 
-    final token = sampler.sample(logits);
+    final result = sampler.sample(SamplingRequest(logits: logits));
 
-    expect(token.id, 1);
+    expect(result.token.id, 1);
   });
 }

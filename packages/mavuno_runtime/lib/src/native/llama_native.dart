@@ -43,6 +43,10 @@ final class LlamaNativeImpl implements LlamaNative {
     _context = LlamaNativeContext(_compat);
     _tokenizer = LlamaNativeTokenizer(_compat);
   }
+
+  /// The runtime owns a single instance of LlamaCompat.
+  LlamaCompat get compat => _compat;
+
   final LlamaCompat _compat;
   late final NativeModel _model;
   late final NativeContext _context;
