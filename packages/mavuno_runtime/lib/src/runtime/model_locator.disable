@@ -1,0 +1,25 @@
+import 'dart:io';
+
+final class ModelLocator {
+  ModelLocator._();
+
+  static const _candidates = [
+    // Running from repository root
+    'models',
+
+    // Running from packages/mavuno_runtime
+    '../../models',
+  ];
+
+  static String resolve(String relativePath) {
+    for (final root in _candidates) {
+      final file = File('$root/$relativePath');
+
+      if (file.existsSync()) {
+        return file.absolute.path;
+      }
+    }
+
+    throw FileSystemException('Unable to locate model.', relativePath);
+  }
+}

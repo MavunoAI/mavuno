@@ -1,7 +1,8 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'native_exception.dart';
-import 'platform_library.dart';
+import 'windows/windows_dll_loader.dart';
 
 typedef LibraryLoader = DynamicLibrary Function(String libraryName);
 
@@ -14,20 +15,64 @@ final class NativeLibrary {
 
   final DynamicLibrary _library;
   DynamicLibrary get dynamicLibrary => _library;
-  factory NativeLibrary.open({LibraryLoader? loader}) {
-    final libraryName = PlatformLibrary.currentLibraryName();
+  factory NativeLibrary.open({List<String>? candidates}) {
+    final searchPaths =
+        candidates ??
+        const [
+          //
+          // Running from repository root
+          //
+          'third_party/llama.cpp/build/bin/Release/llama.dll',
+          'third_party/llama.cpp/build/bin/llama.dll',
 
-    loader ??= DynamicLibrary.open;
+          //
+          // Running from packages/mavuno_runtime
+          //
+          '../../third_party/llama.cpp/build/bin/Release/llama.dll',
+          '../../third_party/llama.cpp/build/bin/llama.dll',
 
-    try {
-      return NativeLibrary._(loader(libraryName));
-    } on Object catch (error) {
-      throw NativeException(
-        code: NativeErrorCode.libraryNotFound,
-        message: 'Unable to load native library: $libraryName',
-        cause: error,
-      );
+          //
+          // Installed runtime
+          //
+          'native/windows/llama.dll',
+          '../../native/windows/llama.dll',
+
+          //
+          // PATH
+          //
+          'llama.dll',
+        ];
+
+    Object? lastError;
+
+    for (final candidate in searchPaths) {
+      try {
+        final file = File(candidate);
+
+        if (!file.existsSync()) {
+          continue;
+        }
+
+        final absolute = file.absolute;
+
+        WindowsDllLoader.registerDirectory(absolute.parent.path);
+
+        final library = DynamicLibrary.open(absolute.path);
+
+        return NativeLibrary._(library);
+      } catch (error) {
+        lastError = error;
+      }
     }
+
+    throw NativeException(
+      code: NativeErrorCode.libraryNotFound,
+      message:
+          'Unable to load llama.dll.\n'
+          'Search paths:\n'
+          '${searchPaths.join('\n')}',
+      cause: lastError,
+    );
   }
 
   Pointer<T> lookup<T extends NativeType>(String symbol) {

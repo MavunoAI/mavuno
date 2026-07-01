@@ -1,0 +1,7 @@
+import '../generation/generation_state.dart';
+
+import 'inference_result.dart';
+
+abstract interface class InferenceEngine {
+  InferenceResult infer(GenerationState session);
+}

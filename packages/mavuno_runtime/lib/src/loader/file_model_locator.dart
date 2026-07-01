@@ -5,6 +5,11 @@ import 'model_locator.dart';
 final class FileModelLocator implements ModelLocator {
   const FileModelLocator({required this.searchDirectories});
 
+  /// Default search locations used by the runtime.
+  factory FileModelLocator.standard() {
+    return FileModelLocator(searchDirectories: [Directory('models'), Directory('../../models')]);
+  }
+
   final List<Directory> searchDirectories;
 
   @override
@@ -15,7 +20,9 @@ final class FileModelLocator implements ModelLocator {
       }
 
       await for (final entity in directory.list(recursive: true)) {
-        if (entity is! File) continue;
+        if (entity is! File) {
+          continue;
+        }
 
         if (!entity.path.toLowerCase().endsWith('.gguf')) {
           continue;
@@ -24,7 +31,7 @@ final class FileModelLocator implements ModelLocator {
         final filename = entity.uri.pathSegments.last;
 
         if (filename.contains(modelId)) {
-          return entity.path;
+          return entity.absolute.path;
         }
       }
     }

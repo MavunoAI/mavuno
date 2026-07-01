@@ -1,17 +1,11 @@
-import 'dart:ffi';
-
 import 'package:mavuno_runtime/mavuno_runtime.dart';
 import 'package:test/test.dart';
-
-DynamicLibrary failingLoader(String _) {
-  throw Exception('Unable to load native library.');
-}
 
 void main() {
   group('NativeLibrary', () {
     test('throws NativeException when library loading fails', () {
       expect(
-        () => NativeLibrary.open(loader: failingLoader),
+        () => NativeLibrary.open(candidates: const ['this_file_does_not_exist.dll']),
         throwsA(
           isA<NativeException>().having((e) => e.code, 'code', NativeErrorCode.libraryNotFound),
         ),

@@ -6,18 +6,10 @@ Future<void> main() async {
   //
   // Load native library
   //
-  final nativeLibrary = NativeLibrary.open();
+  final bootstrap = RuntimeBootstrap.create();
 
-  //
-  // Create native runtime
-  //
-  final native = LlamaNativeImpl(nativeLibrary: nativeLibrary);
-
-  //
-  // Compose runtime
-  //
-  final runtime = createRuntime(native: native, compat: native.compat);
-
+  final runtime = bootstrap.runtime;
+  final native = bootstrap.native;
   //
   // Open runtime session
   //

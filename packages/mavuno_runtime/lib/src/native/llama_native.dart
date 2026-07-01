@@ -24,6 +24,8 @@ abstract interface class LlamaNative {
   ContextHandle createContext(ModelHandle model);
   void destroyContext(ContextHandle context);
   TokenSequence tokenize(ModelHandle model, Prompt prompt);
+  int eosToken(ModelHandle model);
+  String detokenize(ModelHandle model, TokenSequence tokens);
 }
 
 // Provide a fallback alias for a tokenization error code in case the
@@ -43,6 +45,10 @@ final class LlamaNativeImpl implements LlamaNative {
     _context = LlamaNativeContext(_compat);
     _tokenizer = LlamaNativeTokenizer(_compat);
   }
+  @override
+  String detokenize(ModelHandle model, TokenSequence tokens) {
+    return compat.detokenize(model.cast<llama_model>(), tokens);
+  }
 
   /// The runtime owns a single instance of LlamaCompat.
   LlamaCompat get compat => _compat;
@@ -55,6 +61,11 @@ final class LlamaNativeImpl implements LlamaNative {
   @override
   void initialize() {
     _compat.initializeBackend();
+  }
+
+  @override
+  int eosToken(ModelHandle model) {
+    return compat.eosToken(model.cast<llama_model>());
   }
 
   @override

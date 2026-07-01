@@ -1,0 +1,83 @@
+import 'package:mavuno_runtime/mavuno_runtime.dart';
+import 'package:test/test.dart';
+
+void main() {
+  group('Incremental Decode', () {
+    late NativeLibrary nativeLibrary;
+    late LlamaNativeImpl native;
+
+    late PromptDecoder promptDecoder;
+    late TokenDecoder tokenDecoder;
+
+    late FileModelLocator locator;
+    late String modelPath;
+
+    setUpAll(() async {
+      nativeLibrary = NativeLibrary.open();
+
+      native = LlamaNativeImpl(nativeLibrary: nativeLibrary);
+
+      locator = FileModelLocator.standard();
+
+      modelPath =
+          await locator.locate('tinyllama-1.1b-chat-v1.0.Q4_K_M') ??
+          (throw StateError('TinyLlama model not found.'));
+
+      promptDecoder = createPromptDecoder(native: native);
+
+      tokenDecoder = createTokenDecoder(native: native);
+    });
+
+    tearDownAll(() {
+      native.shutdown();
+    });
+
+    test('prefill marks prompt as decoded', () async {
+      final session = RuntimeSession(native);
+
+      await session.open(modelPath: modelPath);
+
+      final promptTokens = native.tokenize(session.model, const Prompt('Hello'));
+
+      final state = GenerationState(
+        session: ContextSession(model: session.model, context: session.context),
+        promptTokens: promptTokens,
+      );
+
+      expect(state.promptDecoded, isFalse);
+
+      promptDecoder.decode(PromptDecodeRequest(state: state));
+
+      expect(state.promptDecoded, isTrue);
+
+      session.close();
+    });
+
+    test('incremental decode accepts one generated token', () async {
+      final session = RuntimeSession(native);
+
+      await session.open(modelPath: modelPath);
+
+      final promptTokens = native.tokenize(session.model, const Prompt('Hello'));
+
+      final state = GenerationState(
+        session: ContextSession(model: session.model, context: session.context),
+        promptTokens: promptTokens,
+      );
+
+      promptDecoder.decode(PromptDecodeRequest(state: state));
+
+      final generated = Token(1);
+
+      state.append(generated);
+
+      tokenDecoder.decode(TokenDecodeRequest(state: state, token: generated));
+
+      expect(state.generatedLength, 1);
+
+      expect(state.lastToken.id, generated.id);
+
+      session.close();
+    });
+  });
+}

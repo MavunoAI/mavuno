@@ -50,6 +50,7 @@ final class RuntimeSession {
     _native.initialize();
 
     final loadedModel = _native.loadModel(modelPath);
+    print('RuntimeSession.open(): $modelPath');
     final createdContext = _native.createContext(loadedModel);
 
     _model = loadedModel;

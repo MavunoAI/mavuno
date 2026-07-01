@@ -1,8 +1,7 @@
-import 'dart:ffi' as ffi;
 import '../../inference/decode_batch.dart';
 import '../native_batch.dart';
-
 import 'native_batch_writer.dart';
+import 'dart:ffi' as ffi;
 
 final class LlamaNativeBatchWriter implements NativeBatchWriter {
   const LlamaNativeBatchWriter();
@@ -22,9 +21,11 @@ final class LlamaNativeBatchWriter implements NativeBatchWriter {
 
       batch.n_seq_id.elementAt(i).value = 1;
 
-      // TODO(Commit 6.1C.3):
+      // TODO(M2.3):
       // Populate seq_id after verifying that
       // llama_batch_init() allocates the nested pointers.
+      //
+      // For now we rely on the default sequence (0).
 
       batch.logits.elementAt(i).value = source.requestLogits[i] ? 1 : 0;
     }

@@ -1,11 +1,11 @@
-import '../generation/generation_session.dart';
+import '../generation/generation_state.dart';
 import '../native/runtime/native_decoder.dart';
 import '../sampling/sampler.dart';
 import '../sampling/sampling_request.dart';
 import 'inference_result.dart';
 
 import 'decode_request.dart';
-import 'inference_engine.dart';
+import 'inference_engine.disable';
 
 final class LlamaInferenceEngine implements InferenceEngine {
   LlamaInferenceEngine({required NativeDecoder decoder, required Sampler sampler})
@@ -16,9 +16,9 @@ final class LlamaInferenceEngine implements InferenceEngine {
   final Sampler _sampler;
 
   @override
-  InferenceResult infer(GenerationSession session) {
+  InferenceResult infer(GenerationState session) {
     final logits = _decoder.decode(
-      DecodeRequest(context: session.context, tokens: session.snapshot()),
+      DecodeRequest(session: session.session, tokens: session.snapshot()),
     );
 
     final sample = _sampler.sample(SamplingRequest(logits: logits));

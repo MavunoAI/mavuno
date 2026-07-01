@@ -1,19 +1,25 @@
 import 'dart:typed_data';
 
+import 'package:mavuno_runtime/src/generation/llama_greedy_sampler.dart';
+import 'package:mavuno_runtime/src/inference/logits.dart';
 import 'package:test/test.dart';
 
-import 'package:mavuno_runtime/src/inference/greedy_sampler.dart';
-import 'package:mavuno_runtime/src/inference/logits.dart';
-import 'package:mavuno_runtime/src/sampling/sampling_request.dart';
-
 void main() {
-  test('returns highest probability token', () {
-    const sampler = GreedySampler();
+  group('LlamaGreedySampler', () {
+    test('returns highest probability token', () {
+      const sampler = LlamaGreedySampler();
 
-    final logits = Logits(Float32List.fromList([0.2, 0.8, 0.1]));
+      final logits = Logits(Float32List.fromList([0.2, 0.8, 0.1]));
 
-    final result = sampler.sample(SamplingRequest(logits: logits));
+      final token = sampler.sample(logits);
 
-    expect(result.token.id, 1);
+      expect(token.id, 1);
+    });
+
+    test('throws for empty logits', () {
+      const sampler = LlamaGreedySampler();
+
+      expect(() => sampler.sample(Logits(Float32List(0))), throwsStateError);
+    });
   });
 }

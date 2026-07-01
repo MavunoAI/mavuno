@@ -19,6 +19,7 @@ final class LlamaNativeModel implements NativeModel {
 
     try {
       final model = _compat.loadModel(pathPtr);
+      print('LlamaNativeModel.load(): $path');
 
       if (model.address == 0) {
         throw NativeException(

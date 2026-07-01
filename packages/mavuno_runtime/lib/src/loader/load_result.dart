@@ -1,4 +1,4 @@
-import '../model/entities/model.dart';
+import '../model/model.dart';
 
 /// Result returned by a model loader.
 ///
